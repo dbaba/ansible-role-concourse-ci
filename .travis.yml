@@ -20,6 +20,7 @@ install:
   - sudo busser plugin install busser-bats
 
 script:
+  - ansible-galaxy install -r requirements.yml
   - echo localhost > inventory
   # Show gathered facts
   - ansible -i inventory --connection=local -m setup localhost
