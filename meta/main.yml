@@ -7,7 +7,7 @@ galaxy_info:
   author: Daisuke Baba
   description: Install docker version of concourse-ci
   license: "license (MIT)"
-  min_ansible_version: 2.0
+  min_ansible_version: 2.0.0.1
   platforms:
     - name: EL
       versions:
