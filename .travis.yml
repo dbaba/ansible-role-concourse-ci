@@ -22,8 +22,6 @@ install:
 script:
   - ansible-galaxy install -r requirements.yml
   - echo localhost > inventory
-  # Show gathered facts
-  - ansible -i inventory --connection=local -m setup localhost
   # Run syntax check
   - ansible-playbook -i inventory --syntax-check test/integration/default/default.yml
   # Run playbook locally
