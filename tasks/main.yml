@@ -1,0 +1,33 @@
+---
+- name: Download get-pip.py
+  get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/tmp/get-pip.py
+
+- name: Install pip
+  become: yes
+  become_method: sudo
+  command: python /tmp/get-pip.py
+
+#http://stackoverflow.com/a/30899856/5340328
+- name: Docker-PY
+  pip:
+    name: "{{ item }}"
+  with_items:
+  - six==1.4
+  - docker-py==1.1.0
+
+- name: Set installation directory
+  set_fact:
+    concourse_ci_dir: /opt/consourse-ci
+
+- name: Create {{ concourse_ci_dir }}
+  file: path={{ concourse_ci_dir }} state=directory mode=0755
+
+- name: Copy docker-compose.yml to {{ concourse_ci_dir }}
+  copy: src=files/docker-compose.yml dest={{ concourse_ci_dir }}
+
+- name: Run docker-compose.yml
+  become: yes
+  become_method: sudo
+  command: /usr/local/bin/docker-compose up -d
+  args:
+    chdir: "{{ concourse_ci_dir }}"

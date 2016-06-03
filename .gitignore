@@ -1,0 +1,4 @@
+.vagrant
+.kitchen
+*.retry
+test/integration/default/roles
