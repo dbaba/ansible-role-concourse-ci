@@ -48,6 +48,7 @@ Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`
     kitchen destroy
 
 # Revision History
-
+ * 1.0.1
+    - Set the valid slack notification secured key
  * 1.0.0
     - Initial Release
