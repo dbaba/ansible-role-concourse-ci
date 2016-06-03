@@ -5,8 +5,8 @@ driver:
 provisioner:
   name: ansible_playbook
   roles_path: roles
-  ansible_verbose: true
-  ansible_verbosity: 2
+  ansible_verbose: false
+  ansible_verbosity: 1
   ansible_version: latest
   require_ruby_for_busser: false
   require_chef_for_busser: true
