@@ -49,5 +49,5 @@ Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`
 
 # Revision History
 
- * 0.0.1
+ * 1.0.0
     - Initial Release
