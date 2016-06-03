@@ -30,4 +30,6 @@ script:
   # - sudo /opt/busser/vendor/bats/bin/bats ./test/integration/default/bats/*.bats
 
 notifications:
-  slack: $SLACK_NOTIFICATION
+  slack:
+    rooms:
+      secure: Eg7eyr9Huv6kGlvr1AbQWKXd3QyvtH2R9pQtVNZibADSNrLHzEvmd2gzyRyGEpYZce+rEEp06D61VUewUBfqy5bb8Ln0vQKMunwJ6a6R04PgrnFkek7SqP97cmUkB62cVuDb9ke4I+VV4tfWRurfw7ZvzDLUQ25yq/1UDtD+Wl6PK/YQft1kOQuMDMZOvexDy/JPL4DmYVAeRix2RSvZcxq6pXuK+3ctPaYtccVbW1l2pU4CNQQ+1LP3Z8UKoRMsxKFv1hHFHg/wxy5aCnC3HKOieI7JJE7kmC5UmrHfz9N8ceDmo5QjCNAKCl+aafqJOnSPq1jMok2QqT7rLBpIOT0rNFoHuvcXJnLy99ue+JPEZgw9ckff+OnTL0CrpL7jKDUjajOw5w8j6gZh+5+aQYoslKscFbbfiRUqa1OhDU4kHaWZ5AyLAmInAqNYbzXMWY1/PptThNoMXEm7RawrudlOFPK3RNZhZ43kKuxCiwnGMYYopyg4p8OFubvNhZ7UFJxcSTu5AdLnSaL9430Q13xixn4u+uN3S9fNCBml2OeWKlxWC+tvWFyXq+Zpmra2hh89Y5dCvHtuAogzSvJZzYxLvRvl3YtntVPsvHVV4JwxA0sc7sYsLSjlkGkoexN3tEF22ugX9DpEKht3Tk+Cpgb6QNoT8t/eABiUwGnaRX8=
