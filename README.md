@@ -25,7 +25,7 @@ This role offers 1 web node and 1 worker node.
 
     git clone https://github.com/dbaba/ansible-role-concourse-ci.git
     cd ansible-role-concourse-ci
-    vagrant up
+    vagrant up # roles directory is placed under `test/integration/default`
 
 Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`ci`) and you can download `fly` binary there.
 
@@ -34,6 +34,7 @@ Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`
     mkdir ansible-roles # this empty folder is used for installing dependencies by `ansible-galaxy`
     cd ansible-roles
     git clone https://github.com/dbaba/ansible-role-concourse-ci.git
+    cd ansible-role-concourse-ci
     gem install bundler
     bundle install
     ansible-galaxy install -r requirements.yml
