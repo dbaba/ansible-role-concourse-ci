@@ -4,7 +4,6 @@ driver:
 
 provisioner:
   name: ansible_playbook
-  roles_path: roles
   ansible_verbose: false
   ansible_verbosity: 1
   ansible_version: latest
