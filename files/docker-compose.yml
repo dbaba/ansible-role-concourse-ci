@@ -3,6 +3,8 @@ version: '2'
 services:
   concourse-db:
     image: postgres:9.5
+    volumes:
+    - "${CONCOURSE_POSTGRESQL_DB_DIR}:/database"
     environment:
       POSTGRES_DB: concourse
       POSTGRES_USER: concourse
