@@ -1,32 +1,37 @@
-concourse-web:
-  image: meteogroup/concourse-ci
-  entrypoint: /concourse-web.sh
+concourse-db:
+  image: postgres:9.5
   environment:
-    CONCOURSE_URL:
-    CONCOURSE_LOGIN: concourse
-    CONCOURSE_PASSWORD: ci
-    CONCOURSE_GITHUB_AUTH_CLIENT_ID:
-    CONCOURSE_GITHUB_AUTH_CLIENT_SECRET:
-    CONCOURSE_GITHUB_AUTH_ORGANIZATION:
-    CONCOURSE_GITHUB_AUTH_TEAM:
-    CONCOURSE_GITHUB_AUTH_USER:
-    CONCOURSE_PUBLICLY_VIEWABLE: "false"
+    POSTGRES_DB: concourse
+    POSTGRES_USER: concourse
+    POSTGRES_PASSWORD: changeme
+    PGDATA: /database
+
+concourse-web:
+  image: concourse/concourse
+  links: [concourse-db]
+  command: web
+  ports: ["8080:8080"]
   volumes:
-  - /var/lib/concourse/keys
-  ports:
-  - 8080:8080
-  - 2222:2222
+  - "${CONCOURSE_KEYS_WEB_DIR}:/concourse-keys"
+  environment:
+    CONCOURSE_BASIC_AUTH_USERNAME: concourse
+    CONCOURSE_BASIC_AUTH_PASSWORD: ci
+    CONCOURSE_EXTERNAL_URL: "${CONCOURSE_EXTERNAL_URL}"
+    CONCOURSE_POSTGRES_DATA_SOURCE: |-
+      postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable
   restart: always
 
 concourse-worker:
-  image: meteogroup/concourse-ci
-  entrypoint: /concourse-worker.sh
+  image: concourse/concourse
+  privileged: true
+  links: [concourse-web]
+  command: worker
+  volumes:
+  - "${CONCOURSE_KEYS_WORKER_DIR}:/concourse-keys"
+  - /var/run/docker.sock:/var/run/docker.sock
+  environment:
+    CONCOURSE_TSA_HOST: concourse-web
   privileged: true
   environment:
-    CONTAINER_DELAY: 5 #seconds, wait for the TSA setup
-  volumes_from:
-  - concourse-web
-  volumes:
-  - /var/run/docker.sock:/var/run/docker.sock
-  net: container:concourse-web
+    CONCOURSE_TSA_HOST: concourse-web
   restart: always

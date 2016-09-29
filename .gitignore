@@ -2,3 +2,4 @@
 .kitchen
 *.retry
 test/integration/default/roles
+files/keys
