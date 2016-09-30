@@ -34,7 +34,4 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     environment:
       CONCOURSE_TSA_HOST: concourse-web
-    privileged: true
-    environment:
-      CONCOURSE_TSA_HOST: concourse-web
     restart: always
