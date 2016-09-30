@@ -5,7 +5,10 @@ ansible-role-concourse-ci
 [![master Build Status](https://travis-ci.org/dbaba/ansible-role-concourse-ci.svg?branch=master)](https://travis-ci.org/dbaba/ansible-role-concourse-ci/)
 [![License MIT](https://img.shields.io/github/license/dbaba/candy-red.svg)](http://opensource.org/licenses/MIT)
 
-This is an Ansible role for [Concourse CI](https://concourse.ci) running as Docker containers with Docker-Compose.
+This is an Ansible role for [Concourse CI](https://concourse.ci) running as Docker containers with Docker-Compose. See the following links for detail.
+
+- [concourse/Setting up/Standalone Binary](https://concourse.ci/binaries.html)
+- [concourse/Setting up/Docker Repository](https://concourse.ci/docker-repository.html)
 
 This role offers 1 web node and 1 worker node.
 
