@@ -3,4 +3,4 @@
   roles:
     - ansible-role-concourse-ci
   environment:
-    CONCOURSE_URL: http://localhost:8080
+    CONCOURSE_EXTERNAL_URL: http://localhost:8080
