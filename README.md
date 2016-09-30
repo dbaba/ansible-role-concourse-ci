@@ -43,7 +43,6 @@ Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`
 ## Syntax Test
 
     ansible-playbook -i localhost --syntax-check test/integration/default/default.yml
-    ansible-playbook -i localhost --syntax-check test/integration/vagrant_libvirt/default.yml
 
 ## Perform test with test-kitchen
 
