@@ -7,20 +7,31 @@
   become_method: sudo
   command: python /tmp/get-pip.py
 
-#http://stackoverflow.com/a/30899856/5340328
 - name: Docker-PY
   pip:
     name: "{{ item }}"
   with_items:
-  - six==1.4
-  - docker-py==1.1.0
+  - docker-py
 
 - name: Set installation directory
   set_fact:
     concourse_ci_dir: /opt/consourse-ci
 
 - name: Create {{ concourse_ci_dir }}
-  file: path={{ concourse_ci_dir }} state=directory mode=0755
+  file: path="{{ item }}" state=directory mode=0755 recurse=yes
+  with_items:
+    - "{{ concourse_ci_dir }}/data"
+    - "{{ concourse_ci_dir }}/keys/web"
+    - "{{ concourse_ci_dir }}/keys/worker"
+
+- name: Set up keys
+  command: "{{ item }}"
+  with_items:
+    - "ssh-keygen -t rsa -f {{ concourse_ci_dir }}/keys/web/tsa_host_key -N ''"
+    - "ssh-keygen -t rsa -f {{ concourse_ci_dir }}/keys/web/session_signing_key -N ''"
+    - "ssh-keygen -t rsa -f {{ concourse_ci_dir }}/keys/worker/worker_key -N ''"
+    - "cp {{ concourse_ci_dir }}/keys/worker/worker_key.pub {{ concourse_ci_dir }}/keys/web/authorized_worker_keys"
+    - "cp {{ concourse_ci_dir }}/keys/web/tsa_host_key.pub {{ concourse_ci_dir }}/keys/worker"
 
 - name: Copy docker-compose.yml to {{ concourse_ci_dir }}
   copy: src=files/docker-compose.yml dest={{ concourse_ci_dir }}
@@ -31,3 +42,7 @@
   command: /usr/local/bin/docker-compose up -d
   args:
     chdir: "{{ concourse_ci_dir }}"
+  environment:
+    CONCOURSE_POSTGRESQL_DB_DIR: "{{ concourse_ci_dir }}/db"
+    CONCOURSE_KEYS_WEB_DIR: "{{ concourse_ci_dir }}/keys/web"
+    CONCOURSE_KEYS_WORKER_DIR: "{{ concourse_ci_dir }}/keys/worker"

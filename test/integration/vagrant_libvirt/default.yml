@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars:
+    vagrant_libvirt_enabled: true
+  roles:
+    - role: ansible-role-concourse-ci
+  environment:
+    CONCOURSE_URL: http://localhost:8080

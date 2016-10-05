@@ -4,7 +4,6 @@ driver:
 
 provisioner:
   name: ansible_playbook
-  roles_path: roles
   ansible_verbose: false
   ansible_verbosity: 1
   ansible_version: latest
@@ -15,7 +14,7 @@ provisioner:
 
 platforms:
   - name: centos/7
-  - name: ubuntu-14.04
+  - name: ubuntu-16.04
 
 suites:
   - name: default
