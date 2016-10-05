@@ -32,6 +32,13 @@ This role offers 1 web node and 1 worker node.
 
 Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`ci`) and you can download `fly` binary there.
 
+## Environment Variables
+
+  - `CONCOURSE_POSTGRESQL_DB_DIR`
+  - `CONCOURSE_KEYS_WEB_DIR`
+  - `CONCOURSE_KEYS_WORKER_DIR`
+  - `CONCOURSE_EXTERNAL_URL`
+
 ## For Development and running test-kitchen
 
     mkdir ansible-roles # this empty folder is used for installing dependencies by `ansible-galaxy`
@@ -56,6 +63,8 @@ Then open your browser, go to http://localhost:8080 (user:`concourse`/password:`
     kitchen destroy
 
 # Revision History
+ * 2.0.0
+    - Use docker image provided by concourse
  * 1.0.1
     - Set the valid slack notification secured key
  * 1.0.0
